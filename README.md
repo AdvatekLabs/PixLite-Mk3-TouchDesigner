@@ -20,8 +20,8 @@ Designed for experimentation, live visuals, and rapid prototyping.
 
 1. Download or clone this repository
 2. Run the setup script
-    a. WINDOWS: run ```setup.ps1```
-    b. OSX: run ```setup.sh```
+   - a. WINDOWS: run ```setup.ps1```
+   - b. OSX: run ```setup.sh```
 2. Add the tox file to your TouchDesigner project (```tox/Pixlite.tox```)
 3. Configure your PixLite device (IP, outputs, protocol)  
 4. Connect your TouchDesigner network to the plugin
