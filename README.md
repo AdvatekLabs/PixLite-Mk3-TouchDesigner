@@ -60,4 +60,4 @@ https://www.advateklighting.com
 
 ## License
 
-Licensed under the Apache License 2.0. See `LICENSE` for details.
+Licensed under the MIT License. See `LICENSE` for details.
