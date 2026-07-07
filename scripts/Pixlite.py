@@ -5,7 +5,6 @@ import base64
 import time
 
 from CallbacksExt import CallbacksExt
-from TDVersionExt import TDVersionExt
 from TDStoreTools import StorageManager
 from PixlitePars import ensurePars
 from PixliteTestMode import PixliteTestModeMixin
@@ -14,11 +13,12 @@ from PixlitePixelOutputs import PixlitePixelOutputsMixin
 from PixlitePixelData import PixlitePixelDataMixin
 from PixliteSystem import PixliteSystemMixin
 from PixliteAuxPort import PixliteAuxPortMixin
+from PixliteInput import PixliteInputMixin
 
 TDF = op.TDModules.mod.TDFunctions
 
 
-class Pixlite(CallbacksExt, TDVersionExt, PixliteSystemMixin, PixliteAuxPortMixin, PixliteTestModeMixin, PixliteStatisticsMixin, PixlitePixelOutputsMixin, PixlitePixelDataMixin):
+class Pixlite(CallbacksExt, PixliteSystemMixin, PixliteAuxPortMixin, PixliteTestModeMixin, PixliteStatisticsMixin, PixlitePixelOutputsMixin, PixlitePixelDataMixin, PixliteInputMixin):
     """
     Pixlite WebSocket API Extension
 
@@ -32,6 +32,15 @@ class Pixlite(CallbacksExt, TDVersionExt, PixliteSystemMixin, PixliteAuxPortMixi
 
         # Ensure all custom parameters exist
         ensurePars(ownerComp)
+
+        # Wire the Input page to the internal POP send-chain (select1 ->
+        # dmxfixture1 -> dmxout1). Runs after ensurePars so the params exist.
+        try:
+            self._SetupInput()
+        except:
+            self.ownerComp.addScriptError(traceback.format_exc() +
+                    "Error in _SetupInput. See textport.")
+            print(traceback.format_exc())
 
         # Initialize callbacks
         self.callbackDat = self.ownerComp.par.Callbackdat.eval()
@@ -51,9 +60,6 @@ class Pixlite(CallbacksExt, TDVersionExt, PixliteSystemMixin, PixliteAuxPortMixi
             self.ownerComp.addScriptError(traceback.format_exc() +
                     "Error in custom onInit callback. See textport.")
             print(traceback.format_exc())
-
-        # Initialize version tracking mixin
-        TDVersionExt.__init__(self, ownerComp)
 
         # Data storage component
         self.dataComp = ownerComp.op('data')

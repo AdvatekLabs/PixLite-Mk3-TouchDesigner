@@ -8,6 +8,7 @@ Parameters are organized by page and created if missing during extension init.
 # Page order for sorting (includes pages from other extensions)
 PAGE_ORDER = [
     'Connection',
+    'Input',
     'System',
     'Pixel Outputs',
     'Pixel Data',
@@ -15,8 +16,6 @@ PAGE_ORDER = [
     'Test Mode',
     'Statistics',
     'Callbacks',
-    'Component',
-    'Version',
 ]
 
 
@@ -51,6 +50,35 @@ PAGES = {
         {'name': 'Disconnect', 'type': 'pulse', 'label': 'Disconnect'},
         {'name': 'Refresh', 'type': 'pulse', 'label': 'Refresh'},
         {'name': 'Identify', 'type': 'pulse', 'label': 'Identify'},
+    ],
+
+    'Input': [
+        # Source section - scene pixel data feeding this component
+        {'name': 'Inheadersource', 'type': 'header', 'label': 'Source'},
+        {'name': 'Inpixeldata', 'type': 'pop', 'default': '/components/null1', 'label': 'Pixel Data POP'},
+
+        # Addressing section - base network address of the transmitted stream.
+        # Net/Subnet only apply to Art-Net; sACN uses a flat universe.
+        # When 'Infer from Pixel Data' is on, Net/Subnet/Universe/Start Channel
+        # are derived from the first pixel output (Port 0) and locked read-only.
+        {'name': 'Inheaderaddr', 'type': 'header', 'label': 'Addressing'},
+        {'name': 'Ininfer', 'type': 'toggle', 'default': True, 'label': 'Infer from Pixel Data'},
+        {'name': 'Innet', 'type': 'int', 'default': 0, 'label': 'Net',
+         'min': 0, 'max': 127, 'clampMin': True, 'clampMax': True,
+         'enableExpr': "me.par.Pixdatasrc.eval() == 'Art-Net' and not me.par.Ininfer.eval()"},
+        {'name': 'Insubnet', 'type': 'int', 'default': 0, 'label': 'Subnet',
+         'min': 0, 'max': 15, 'clampMin': True, 'clampMax': True,
+         'enableExpr': "me.par.Pixdatasrc.eval() == 'Art-Net' and not me.par.Ininfer.eval()"},
+        {'name': 'Inuniverse', 'type': 'int', 'default': 0, 'label': 'Universe',
+         'min': 0, 'clampMin': True,
+         'enableExpr': "not me.par.Ininfer.eval()"},
+        {'name': 'Inchannel', 'type': 'int', 'default': 1, 'label': 'Start Channel',
+         'min': 1, 'max': 512, 'clampMin': True, 'clampMax': True,
+         'enableExpr': "not me.par.Ininfer.eval()"},
+
+        # Network section - which local NIC transmits the data
+        {'name': 'Inheadernet', 'type': 'header', 'label': 'Network'},
+        {'name': 'Inlocaladdress', 'type': 'strmenu', 'default': '', 'label': 'Local Address'},
     ],
 
     'System': [
@@ -344,6 +372,10 @@ def _ensurePar(page, parDef):
         newPar = page.appendMenu(name, label=label)
     elif parType == 'pulse':
         newPar = page.appendPulse(name, label=label)
+    elif parType == 'pop':
+        newPar = page.appendPOP(name, label=label)
+    elif parType == 'strmenu':
+        newPar = page.appendStrMenu(name, label=label)
     else:
         return
 
@@ -413,6 +445,10 @@ def _createPar(page, parDef):
         newPar = page.appendMenu(name, label=label)
     elif parType == 'pulse':
         newPar = page.appendPulse(name, label=label)
+    elif parType == 'pop':
+        newPar = page.appendPOP(name, label=label)
+    elif parType == 'strmenu':
+        newPar = page.appendStrMenu(name, label=label)
     else:
         return
 
