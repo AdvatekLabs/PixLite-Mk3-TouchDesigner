@@ -1,63 +1,68 @@
-# PixLite TouchDesigner Plugin
+# PixLite Mk3 TouchDesigner Plugin
 
-Unofficial TouchDesigner plugin for Advatek PixLite controllers, built by the community.
+A community-built TouchDesigner component for real-time control and pixel-data
+workflows with Advatek PixLite Mk3 controllers.
 
----
+> [!IMPORTANT]
+> This is an early-stage, unofficial community project. It is not supported by
+> Advatek Lighting, and features or compatibility may change.
 
-## Overview
+## What it does
 
-This project enables real-time integration between TouchDesigner and Advatek PixLite devices. It provides a simple interface for sending pixel data, managing outputs, and incorporating PixLite controllers into interactive and generative visual workflows.
+The component connects TouchDesigner to a PixLite Mk3 controller over its
+WebSocket API. It can:
 
-Designed for experimentation, live visuals, and rapid prototyping.
+- read and update system, pixel-output and auxiliary-port settings;
+- control test mode and monitor controller statistics;
+- send pixel data from a TouchDesigner POP; and
+- support interactive visuals, prototyping and show-control workflows.
 
-## Features
+## Compatibility
 
-- Integration with PixLite Mk3 controllers  
-- Lightweight and flexible workflow  
-- Designed for creative coding and show control environments  
+- Advatek PixLite Mk3 controllers
+- PixLite WebSocket API v1.7
+- Windows or macOS
+- A TouchDesigner build with Python extensions and WebSocket DAT support
+- A network connection between TouchDesigner and the PixLite controller
 
-## Getting Started
+Exact TouchDesigner build compatibility has not yet been formally qualified.
+Use a current production build and report any compatibility problems through
+[GitHub Issues](https://github.com/advateklabs/PixLite-Mk3-TouchDesigner/issues).
 
-1. Download or clone this repository
-2. Run the setup script
-   - a. WINDOWS: run ```setup.ps1```
-   - b. OSX: run ```setup.sh```
-2. Add the tox file to your TouchDesigner project (```tox/Pixlite.tox```)
-3. Configure your PixLite device (IP, outputs, protocol)  
-4. Connect your TouchDesigner network to the plugin
-5. Start sending pixel data  
+## Installation
 
-## Requirements
+1. Download or clone this repository.
+2. From the repository root, run the setup script for your operating system:
+   - Windows PowerShell: `.\setup.ps1`
+   - macOS Terminal: `bash setup.sh`
+3. Restart TouchDesigner so it can read the `TD_PIXLITE` environment variable.
+4. Add [`tox/Pixlite.tox`](tox/Pixlite.tox) to your TouchDesigner project.
+5. On the component's **Connection** page, enter the PixLite controller's IP
+   address and credentials.
+6. Connect the component, configure the required outputs or input source, and
+   begin your workflow.
 
-- TouchDesigner (latest recommended build)  
-- Advatek PixLite Mk3 controller  
-- Network connection between host machine and device  
+## Project status
 
-## Status
-
-This is an early-stage, community-driven project. Features may change and stability is not guaranteed.
+This project is suitable for experimentation, live visuals and rapid
+prototyping. Review the [changelog](CHANGELOG.md) for recent changes before
+updating an existing project.
 
 ## Contributing
 
-Contributions are welcome. If you have improvements, bug fixes, or ideas, feel free to open an issue or submit a pull request.
+Bug reports, improvements and pull requests are welcome.
 
-Please open all pull requests against the `dev` branch.
+- Open an issue before starting a substantial change.
+- Create feature and fix branches from `main`.
+- Open pull requests against `main`.
+- Reference the related issue in the pull request when one exists.
 
-Create feature and fix branches from `dev`.
+## Support and disclaimer
 
-If an issue exists, include the issue number in your pull request.
-
----
-
-## Disclaimer
-
-This is an unofficial plugin and is not affiliated with or supported by Advatek Lighting.  
-
-For official documentation and support, visit:  
-https://www.advateklighting.com
-
----
+This plugin is not affiliated with or supported by Advatek Lighting. For
+official product documentation and support, visit
+[Advatek Lighting](https://www.advateklighting.com).
 
 ## License
 
-Licensed under the MIT License. See `LICENSE` for details.
+Licensed under the [MIT License](LICENSE).
