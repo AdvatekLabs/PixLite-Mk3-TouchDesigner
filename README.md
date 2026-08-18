@@ -27,7 +27,7 @@ WebSocket API. It can:
 
 Exact TouchDesigner build compatibility has not yet been formally qualified.
 Use a current production build and report any compatibility problems through
-[GitHub Issues](https://github.com/advateklabs/PixLite-Mk3-TouchDesigner/issues).
+[GitHub Issues](https://github.com/advatekcommunitylabs/PixLite-Mk3-TouchDesigner/issues).
 
 ## Installation
 
