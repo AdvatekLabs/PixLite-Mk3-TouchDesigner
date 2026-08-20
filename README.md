@@ -57,6 +57,12 @@ Bug reports, improvements and pull requests are welcome.
 - Open pull requests against `main`.
 - Reference the related issue in the pull request when one exists.
 
+## Contributors
+
+This project is maintained by its community contributors. See the
+[GitHub contributors](https://github.com/advatekcommunitylabs/PixLite-Mk3-TouchDesigner/graphs/contributors)
+for individual authorship and contribution history.
+
 ## Support and disclaimer
 
 This plugin is not affiliated with or supported by Advatek Lighting. For
