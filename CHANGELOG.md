@@ -9,8 +9,8 @@ Each released version is tagged in git as `vX.Y.Z`.
 ## [1.2.0] - 2026-07-07
 
 ### Added
-- **About page** via Derivative's official `docsHelper` component — shows the
-  component version, a help link, and the `.tox` save-build stamp.
+- **About page** using Derivative's official `docsHelper` component. It shows
+  the component version, a help link, and the `.tox` save-build stamp.
 - **Infer from Pixel Data** toggle on the Input page. When enabled, the transmit
   base address (Net / Subnet / Universe / Start Channel) is derived from the first
   pixel output (Port 0) and the fields are locked read-only.
@@ -19,8 +19,9 @@ Each released version is tagged in git as `vX.Y.Z`.
 - Renamed the Input source parameter label to **Pixel Data POP**.
 
 ### Removed
-- **Channel Gap** parameter from the Input page — it applies to spacing between
-  discrete DMX fixtures and is not meaningful for a contiguous pixel stream.
+- **Channel Gap** parameter from the Input page because it applies to spacing
+  between discrete DMX fixtures and is not meaningful for a contiguous pixel
+  stream.
 - **TDVersionExt** and **TDToxExt** extensions, along with their **Version** and
   **Component** parameter pages. Component versioning, remote update checks, and
   automatic tox export are no longer part of the component; versioning is now
